@@ -263,10 +263,28 @@ def main(argv: Optional[List[str]] = None) -> int:
     input_path = _resolve_input(args.input)
     if not input_path.is_file():
         sys.stderr.write(
-            f"ERROR: CV file not found at '{args.input}'.\n"
-            f"Place a Word CV at 'public/cv.docx' (or pass --input PATH) and re-run.\n"
+            f"WARNING: CV file not found at '{args.input}'.\n"
+            f"Writing an empty stub to '{args.output}'. "
+            f"The site will fall back to src/content/cvManual.ts.\n"
         )
-        return 2
+        stub = {
+            "meta": {
+                "source": str(input_path).replace(os.sep, "/"),
+                "generatedAt": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
+                "missing": True,
+            },
+            "header": {},
+            "sections": {
+                "employment": [], "education": [], "research_areas": [],
+                "publications": [], "work_in_progress": [], "teaching": [],
+                "invited_talks": [], "honors": [], "service": [],
+            },
+            "other": {},
+        }
+        output_path = Path(args.output)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(json.dumps(stub, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        return 0
 
     try:
         data = parse(input_path)
