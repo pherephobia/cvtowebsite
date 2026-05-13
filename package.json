@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "generate:cv": "python3 scripts/cv/parse_docx.py --input public/cv.docx --output src/generated/cv-data.json",
+    "generate:cv": "python3 scripts/cv/parse_tex.py --input public/cv.tex --output src/generated/cv-data.json",
     "dev": "npm run generate:cv && next dev",
     "build": "npm run generate:cv && next build",
     "start": "next start",
