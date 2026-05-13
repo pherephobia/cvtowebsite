@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+.DS_Store
+*.log
+.env.local
+.env*.local
+
+# Generated CV data is rebuilt by `npm run generate:cv`.
+# Keep it out of version control; the source of truth is public/cv.docx.
+src/generated/cv-data.json

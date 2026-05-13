@@ -1,0 +1,23 @@
+{
+  "name": "cvtowebsite",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "generate:cv": "python3 scripts/cv/parse_docx.py --input public/cv.docx --output src/generated/cv-data.json",
+    "dev": "npm run generate:cv && next dev",
+    "build": "npm run generate:cv && next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.35",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.10",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "typescript": "5.5.3"
+  }
+}
